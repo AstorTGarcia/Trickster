@@ -15,7 +15,6 @@ import trickster.hud.Hud;
 import trickster.util.EstadosDelJuego;
 import trickster.util.FontStyle;
 import trickster.util.MundoConfig;
-import trickster.util.Recursos;
 import trickster.util.Render;
 import trickster.util.Resources;
 
@@ -36,7 +35,7 @@ public class MenuScreen extends Hud implements Screen {
 
     @Override
     public void show() {
-        Recursos.muxJuego.addProcessor(stage);//agrega la stage al mux del juego
+        Resources.muxJuego.addProcessor(stage);//agrega la stage al mux del juego
         super.visible = true;
    }
 
@@ -87,7 +86,7 @@ public class MenuScreen extends Hud implements Screen {
 
     @Override
     public void dispose() {
-    	 Recursos.muxJuego.removeProcessor(stage);
+    	Resources.muxJuego.removeProcessor(stage);
     	 
         super.stage.dispose();
     }
@@ -114,9 +113,9 @@ public class MenuScreen extends Hud implements Screen {
         title = new Label("Trickster", titleStyle);
 
         optionsText = new Label[3];
-        optionsText[0] = new Label(Recursos.bundle.get("menu1.valor1.jugar"), optionsStyle);
-        optionsText[1] = new Label(Recursos.bundle.get("menu1.valor2.config"), optionsStyle);
-        optionsText[2] = new Label(Recursos.bundle.get("menu1.valor3.salir"), optionsStyle);
+        optionsText[0] = new Label(Resources.bundle.get("menu1.valor1.jugar"), optionsStyle);
+        optionsText[1] = new Label(Resources.bundle.get("menu1.valor2.config"), optionsStyle);
+        optionsText[2] = new Label(Resources.bundle.get("menu1.valor3.salir"), optionsStyle);
 
         for(int i = 0; i < optionsText.length; i++){
             Label option = optionsText[i];
