@@ -12,13 +12,15 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import trickster.Main;
 import trickster.hud.ConfigurationsHud;
 import trickster.hud.Hud;
+import trickster.util.EstadosDelJuego;
 import trickster.util.FontStyle;
+import trickster.util.MundoConfig;
+import trickster.util.Recursos;
 import trickster.util.Render;
 import trickster.util.Resources;
 
 public class MenuScreen extends Hud implements Screen {
     private final Main GAME;
-    private ConfigurationsHud configHud;
 
     private Table menuTable;
     private Table options;
@@ -34,19 +36,16 @@ public class MenuScreen extends Hud implements Screen {
 
     @Override
     public void show() {
-        Main.multiplexer.addProcessor(stage);
+        Recursos.muxJuego.addProcessor(stage);//agrega la stage al mux del juego
         super.visible = true;
-
-        this.configHud = new ConfigurationsHud();
-    }
+   }
 
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
         Render.batch.begin();
 
-        super.draw();
-        configHud.draw();
+        draw();
 
         Render.batch.end();
     }
@@ -55,13 +54,14 @@ public class MenuScreen extends Hud implements Screen {
         switch(option){
             // Jugar
             case 0:
-                // GAME.setScreen();
-                // hide();
-                // dispose();
+            	MundoConfig.estadoDelJuego = EstadosDelJuego.JUGANDO;
+                 GAME.setScreen(new Juego());
+                 this.dispose();
                 break;
             // Configuraciones
             case 1:
-                configHud.display();
+            	MundoConfig.estadoDelJuego = EstadosDelJuego.CONFIGURACION;
+            	GAME.setScreen(new ConfigurationsHud());
                 break;
             // Salir
             case 2:
@@ -83,11 +83,12 @@ public class MenuScreen extends Hud implements Screen {
 
     @Override
     public void hide() {
-        Main.multiplexer.removeProcessor(stage);
     }
 
     @Override
     public void dispose() {
+    	 Recursos.muxJuego.removeProcessor(stage);
+    	 
         super.stage.dispose();
     }
 
@@ -113,9 +114,9 @@ public class MenuScreen extends Hud implements Screen {
         title = new Label("Trickster", titleStyle);
 
         optionsText = new Label[3];
-        optionsText[0] = new Label("Jugar", optionsStyle);
-        optionsText[1] = new Label("Configuraciones", optionsStyle);
-        optionsText[2] = new Label("Salir", optionsStyle);
+        optionsText[0] = new Label(Recursos.bundle.get("menu1.valor1.jugar"), optionsStyle);
+        optionsText[1] = new Label(Recursos.bundle.get("menu1.valor2.config"), optionsStyle);
+        optionsText[2] = new Label(Recursos.bundle.get("menu1.valor3.salir"), optionsStyle);
 
         for(int i = 0; i < optionsText.length; i++){
             Label option = optionsText[i];

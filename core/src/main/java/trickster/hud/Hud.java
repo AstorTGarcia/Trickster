@@ -24,12 +24,10 @@ public abstract class Hud {
 
     public void display(){
         visible = true;
-        Main.multiplexer.addProcessor(0, stage);
     }
 
     public void close(){
         visible = false;
-        Main.multiplexer.removeProcessor(stage);
     }
 
     public void draw() {

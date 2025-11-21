@@ -1,5 +1,6 @@
 package trickster.hud;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -7,9 +8,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import trickster.util.FontStyle;
+import trickster.util.HelpDebug;
+import trickster.util.Render;
 import trickster.util.Resources;
 
-public class ConfigurationsHud extends Hud {
+public class ConfigurationsHud extends Hud implements Screen{
 
     private Table menuTable;
     private Table options;
@@ -79,5 +82,46 @@ public class ConfigurationsHud extends Hud {
 
         super.stage.addActor(menuTable);
     }
+
+	@Override
+	public void show() {
+		createFonts();
+		createActors();
+		populateStage();
+	}
+
+	@Override
+	public void render(float delta) {
+        Render.batch.begin();
+
+        draw();
+
+        Render.batch.end();
+		
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
