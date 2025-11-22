@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import trickster.cartas.Carta;
+import trickster.cartas.CartaVisual;
 import trickster.cartas.Palo;
 import trickster.entidades.Barajador;
 import trickster.entidades.Enemigo;
@@ -19,7 +20,7 @@ public class Juego implements Screen{
 	private Enemigo e;
 	private Barajador b;
 	
-	private Sprite c = new Sprite(new Texture(Resources.ANCHO_BOSTA));
+	private CartaVisual c = new CartaVisual(new Carta(1, Palo.BASTO));
 	
 	@Override
 	public void show() {
@@ -32,7 +33,7 @@ public class Juego implements Screen{
 		
 		j.mostrarCartas();
 		
-		c.setScale(0.3f,0.3f);
+
 	}
 
 	@Override
@@ -40,7 +41,7 @@ public class Juego implements Screen{
 		
 		if(j.tieneCarta(new Carta(1,Palo.BASTO))) {
 			Render.batch.begin();
-			c.draw(Render.batch);
+			c.dibujar();
 			Render.batch.end();
 		}
 		
