@@ -26,7 +26,7 @@ public class Main extends Game {
         switch (MundoConfig.estadoDelJuego) {//esto nos va a servir para debugear facil
 		case MENU:
 			//cuando el estado de juego es MENU, usamos el input multiplexer de menus
-			Gdx.input.setInputProcessor(Resources.muxJuego);
+			Gdx.input.setInputProcessor(Resources.muxMenu);
 			 setScreen(new MenuScreen(this));
 			break;
 

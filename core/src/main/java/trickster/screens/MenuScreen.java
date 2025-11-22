@@ -35,7 +35,7 @@ public class MenuScreen extends Hud implements Screen {
 
     @Override
     public void show() {
-        Resources.muxJuego.addProcessor(stage);//agrega la stage al mux del juego
+        Resources.muxMenu.addProcessor(stage);//agrega la stage al mux del juego
         super.visible = true;
    }
 
