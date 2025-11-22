@@ -19,7 +19,7 @@ public class Main extends Game {
 
     @Override
     public void create() {
-    	MundoConfig.estadoDelJuego = EstadosDelJuego.MENU;//Al iniciar el juego arranca en el menu
+    	MundoConfig.estadoDelJuego = EstadosDelJuego.JUGANDO;//Al iniciar el juego arranca en el menu
         Render.batch = new SpriteBatch();
 
         
