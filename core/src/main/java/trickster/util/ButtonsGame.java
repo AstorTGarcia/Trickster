@@ -3,6 +3,7 @@ package trickster.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -29,6 +30,7 @@ public class ButtonsGame extends TextButton {
         this.stateTime = 0f;
 
         this.botonHoverAnimation = createAnimation(botonHoverTexture, frameCount, 0.1f);
+        botonHoverAnimation.setPlayMode(PlayMode.NORMAL);
     }
 
     @Override
@@ -39,12 +41,15 @@ public class ButtonsGame extends TextButton {
 
             if(!animationFinished){
                 stateTime += Gdx.graphics.getDeltaTime();
-                TextureRegion currentFrame = botonHoverAnimation.getKeyFrame(stateTime, true);
+                
+                TextureRegion currentFrame = botonHoverAnimation.getKeyFrame(stateTime, false);
                 b.draw(currentFrame,getX(),getY(),getWidth(),getHeight());
                 getLabel().draw(b, parentAlpha);
             }else{
                 TextureRegion currentFrame = botonHoverAnimation.getKeyFrame(stateTime, false);
                 b.draw(currentFrame,getX(),getY(),getWidth(),getHeight());
+
+                
 
             }
 
@@ -61,6 +66,7 @@ public class ButtonsGame extends TextButton {
 
         for (int i = 0;i< frameCount; i++){
             animationFrames[i] = framesMatrix [0][i];
+
         }
 
         return new Animation<>(frameDuration,animationFrames);
