@@ -16,4 +16,9 @@ public abstract class Resources {
 	
 	public static I18NBundle bundle = I18NBundle.createBundle(Gdx.files.internal("locale/locale"));
 	
+	
+	
+	//Particulas
+	public static String FUEGO_PARTICULAS = "particleEffects/flame.p";
+	public static String ATLAS_PARTICULAS = "particleEffects/particle.png";
 }

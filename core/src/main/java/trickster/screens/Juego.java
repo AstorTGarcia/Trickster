@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
@@ -41,6 +43,9 @@ public class Juego extends Hud implements Screen{
 	private Stage stage;
 	private OrthographicCamera camara;
 	
+	private ParticleEffect particle;
+	private TextureAtlas tA = new TextureAtlas(Resources.FUEGO_PARTICULAS);
+	
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
@@ -56,7 +61,12 @@ public class Juego extends Hud implements Screen{
 		j.mostrarCartas();
 
 
+		particle = new ParticleEffect();
+		particle.load(Gdx.files.internal(Resources.FUEGO_PARTICULAS));
+		particle.setPosition(200, 200);
+		particle.start();
 
+		
 		
 
 	}
@@ -67,6 +77,9 @@ public class Juego extends Hud implements Screen{
 		stage.draw();
 		stage.act();
 		
+		Render.batch.begin();
+		particle.draw(Render.batch, delta); 
+		Render.batch.end();
 	}
 
 	@Override
