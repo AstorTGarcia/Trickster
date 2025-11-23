@@ -2,33 +2,40 @@ package trickster.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import trickster.Main;
 import trickster.hud.ConfigurationsHud;
 import trickster.hud.Hud;
-import trickster.util.EstadosDelJuego;
-import trickster.util.FontStyle;
-import trickster.util.MundoConfig;
-import trickster.util.Recursos;
-import trickster.util.Render;
-import trickster.util.Resources;
+import trickster.util.*;
 
 public class MenuScreen extends Hud implements Screen {
     private final Main GAME;
+
+
+
 
     private Table menuTable;
     private Table options;
 
     private Label title;
-    private Label[] optionsText;
+    private ButtonsGame[] optionsText;
 
     private Label.LabelStyle titleStyle, optionsStyle, optionSelectedStyle;
+    private Texture buttonSprite, buttonFinalSprite;
+    private Texture animacionHover;
+    private Skin miSkin;
+    float buttonWidth,buttonHeight;
 
     public MenuScreen(final Main GAME){
         this.GAME = GAME;
@@ -88,7 +95,7 @@ public class MenuScreen extends Hud implements Screen {
     @Override
     public void dispose() {
     	 Recursos.muxJuego.removeProcessor(stage);
-    	 
+
         super.stage.dispose();
     }
 
@@ -97,6 +104,13 @@ public class MenuScreen extends Hud implements Screen {
         titleStyle = FontStyle.generateFont(80, "#ffffff", false, Resources.MENU_FONT);
         optionsStyle = FontStyle.generateFont(50, "#ffffff", false, Resources.MENU_FONT);
         optionSelectedStyle = FontStyle.generateFont(50, "#ffff00", true, Resources.MENU_FONT);
+        buttonSprite = new Texture(Recursos.botonMainMenuSprite);
+        animacionHover = new Texture(Recursos.botonMainMenuHoverSprite);
+        buttonFinalSprite = new Texture(Recursos.botonMainMenuFinal);
+        buttonHeight = buttonSprite.getHeight();
+        buttonWidth = buttonSprite.getWidth();
+
+        miSkin = new Skin(Gdx.files.internal("skin/uiskin.json"));
     }
 
     @Override
@@ -113,43 +127,20 @@ public class MenuScreen extends Hud implements Screen {
         // Labels
         title = new Label("Trickster", titleStyle);
 
-        optionsText = new Label[3];
-        optionsText[0] = new Label(Recursos.bundle.get("menu1.valor1.jugar"), optionsStyle);
-        optionsText[1] = new Label(Recursos.bundle.get("menu1.valor2.config"), optionsStyle);
-        optionsText[2] = new Label(Recursos.bundle.get("menu1.valor3.salir"), optionsStyle);
+        optionsText = new ButtonsGame[3];
+        optionsText[0] = new ButtonsGame("Jugar",miSkin,buttonSprite,animacionHover,buttonFinalSprite,6);
+        optionsText[1] = new ButtonsGame("Opciones",miSkin,buttonSprite,animacionHover,buttonFinalSprite,6);
+        optionsText[2] = new ButtonsGame("Salir",miSkin,buttonSprite,animacionHover,buttonFinalSprite,6);
 
-        for(int i = 0; i < optionsText.length; i++){
-            Label option = optionsText[i];
-            option.setTouchable(Touchable.enabled);
-
-            int finalI = i;
-            option.addListener(new ClickListener(){
-                @Override
-                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                    option.setStyle(optionSelectedStyle);
-                }
-
-                @Override
-                public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                    option.setStyle(optionsStyle);
-                }
-
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    selectedOption(finalI);
-                }
-            });
-
-        }
     }
 
     @Override
     protected void populateStage() {
-        options.add(optionsText[0]);
+        options.add(optionsText[0]).width(buttonWidth).height(buttonHeight);
         options.row();
-        options.add(optionsText[1]);
+        options.add(optionsText[1]).width(buttonWidth).height(buttonHeight);
         options.row();
-        options.add(optionsText[2]);
+        options.add(optionsText[2]).width(buttonWidth).height(buttonHeight);
         options.row();
 
         menuTable.add(title).padTop(10);
