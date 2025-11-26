@@ -43,6 +43,7 @@ public class MenuScreen extends Hud implements Screen {
 
     @Override
     public void show() {
+        super.stage.setDebugAll(true);
         Recursos.muxJuego.addProcessor(stage);//agrega la stage al mux del juego
         super.visible = true;
    }
@@ -128,9 +129,9 @@ public class MenuScreen extends Hud implements Screen {
         title = new Label("Trickster", titleStyle);
 
         optionsText = new ButtonsGame[3];
-        optionsText[0] = new ButtonsGame("Jugar",miSkin,buttonSprite,animacionHover,buttonFinalSprite,6);
-        optionsText[1] = new ButtonsGame("Opciones",miSkin,buttonSprite,animacionHover,buttonFinalSprite,6);
-        optionsText[2] = new ButtonsGame("Salir",miSkin,buttonSprite,animacionHover,buttonFinalSprite,6);
+        optionsText[0] = new ButtonsGame("Jugar",miSkin,buttonSprite,animacionHover,6);
+        optionsText[1] = new ButtonsGame("Opciones",miSkin,buttonSprite,animacionHover,6);
+        optionsText[2] = new ButtonsGame("Salir",miSkin,buttonSprite,animacionHover,6);
 
     }
 
@@ -148,7 +149,7 @@ public class MenuScreen extends Hud implements Screen {
         menuTable.add(options).expand();
         menuTable.row();
 
-        super.stage.addActor(menuTable);
+        stage.addActor(menuTable);
     }
 
 }

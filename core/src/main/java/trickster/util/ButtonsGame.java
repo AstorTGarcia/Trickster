@@ -9,21 +9,23 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 
 public class ButtonsGame extends TextButton {
 
-    protected Texture botonHoverTexture, botonFinalHover;
-    protected boolean botonFrameFinal;
-    protected Animation<TextureRegion> botonHoverAnimation;
+    protected Texture botonHoverTexture;
+    protected Animation<TextureRegionDrawable> botonHoverAnimation;
+    private Label label;
+    private TextureRegionDrawable botonSprite, botonHover;
     private float stateTime;
 
-    public ButtonsGame(String textButton, Skin skin, Texture botonSprite, Texture botonHover,Texture botonFinalHover ,int frameCount) {
+    public ButtonsGame(String textButton, Skin skin, Texture botonSprite, Texture botonHover ,int frameCount) {
         super(textButton, skin);
 
+        label = getLabel();
         TextButtonStyle style = new TextButtonStyle(skin.get(TextButtonStyle.class));
-        style.up = new TextureRegionDrawable(new TextureRegion(botonSprite));
+        this.botonSprite = new TextureRegionDrawable(botonSprite);
         setStyle(style);
 
         this.botonHoverTexture = botonHover;
@@ -36,40 +38,28 @@ public class ButtonsGame extends TextButton {
     @Override
     public void draw(Batch b, float parentAlpha){
         if (isOver() && botonHoverAnimation != null) {
-
-            boolean animationFinished = botonHoverAnimation.isAnimationFinished(stateTime);
-
-            if(!animationFinished){
+            if(!botonHoverAnimation.isAnimationFinished(stateTime)){
                 stateTime += Gdx.graphics.getDeltaTime();
-                
-                TextureRegion currentFrame = botonHoverAnimation.getKeyFrame(stateTime, false);
-                b.draw(currentFrame,getX(),getY(),getWidth(),getHeight());
-                getLabel().draw(b, parentAlpha);
-            }else{
-                TextureRegion currentFrame = botonHoverAnimation.getKeyFrame(stateTime, false);
-                b.draw(currentFrame,getX(),getY(),getWidth(),getHeight());
-
-                
-
             }
-
+            TextureRegionDrawable currentFrame = new TextureRegionDrawable(botonHoverAnimation.getKeyFrame(stateTime, false));
+            getStyle().up = currentFrame;
         } else {
             stateTime = 0;
-            super.draw(b, parentAlpha);
+            getStyle().up = botonSprite;
         }
+        super.draw(b, parentAlpha);
     }
 
 
-    public Animation<TextureRegion> createAnimation(Texture sprite, int frameCount, float frameDuration) {
+    public Animation<TextureRegionDrawable> createAnimation(Texture sprite, int frameCount, float frameDuration) {
         TextureRegion[][] framesMatrix = TextureRegion.split(sprite, sprite.getWidth()/frameCount, sprite.getHeight());
-        TextureRegion[] animationFrames = new TextureRegion[frameCount];
+        TextureRegionDrawable[] animationFrames = new TextureRegionDrawable[frameCount];
 
         for (int i = 0;i< frameCount; i++){
-            animationFrames[i] = framesMatrix [0][i];
-
+            animationFrames[i] = new TextureRegionDrawable(framesMatrix[0][i]);
         }
 
-        return new Animation<>(frameDuration,animationFrames);
+        return new Animation<TextureRegionDrawable>(frameDuration,animationFrames);
     }
 
 
