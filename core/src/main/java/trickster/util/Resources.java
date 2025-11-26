@@ -10,6 +10,7 @@ public abstract class Resources {
     public static final String MENU_FONT = "fonts/alagard.ttf";
 
     public static final String ANCHO_BOSTA = "borrar/anchoDeBasto.png";
+    public static final String UNO_ORO = "borrar/chadDeOro.png";
     
 	public static InputMultiplexer muxJuego = new InputMultiplexer();
 	public static InputMultiplexer muxMenu = new InputMultiplexer();
@@ -20,5 +21,6 @@ public abstract class Resources {
 	
 	//Particulas
 	public static String FUEGO_PARTICULAS = "particleEffects/flame.p";
-	public static String ATLAS_PARTICULAS = "particleEffects/particle.png";
+	public static String CHISPAS_PARTICULAS = "particleEffects/chispas.p";
+	public static String ATLAS_PARTICULAS = "particleEffects/particulasDelJuego.atlas";//ATLAS CON TODAS LAS PARTICULAS, USAR GDXTEXTUREPACKER
 }

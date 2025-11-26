@@ -43,8 +43,8 @@ public class Juego extends Hud implements Screen{
 	private Stage stage;
 	private OrthographicCamera camara;
 	
-	private ParticleEffect particle;
-	private TextureAtlas tA = new TextureAtlas(Resources.FUEGO_PARTICULAS);
+	private ParticleEffect fuego, chispas;
+	private TextureAtlas tA = new TextureAtlas(Resources.ATLAS_PARTICULAS);
 	
 	@Override
 	public void show() {
@@ -61,10 +61,15 @@ public class Juego extends Hud implements Screen{
 		j.mostrarCartas();
 
 
-		particle = new ParticleEffect();
-		particle.load(Gdx.files.internal(Resources.FUEGO_PARTICULAS));
-		particle.setPosition(200, 200);
-		particle.start();
+		fuego = new ParticleEffect();
+		fuego.load(Gdx.files.internal(Resources.FUEGO_PARTICULAS), tA);
+		fuego.setPosition(200, 200);
+		fuego.start();
+		
+		chispas = new ParticleEffect();
+		chispas.load(Gdx.files.internal(Resources.CHISPAS_PARTICULAS), tA);
+		chispas.setPosition(400, 200);
+		chispas.start();
 
 		
 		
@@ -78,7 +83,8 @@ public class Juego extends Hud implements Screen{
 		stage.act();
 		
 		Render.batch.begin();
-		particle.draw(Render.batch, delta); 
+		fuego.draw(Render.batch, delta); 
+		chispas.draw(Render.batch, delta); 
 		Render.batch.end();
 	}
 

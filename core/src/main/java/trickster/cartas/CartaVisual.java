@@ -23,6 +23,8 @@ public class CartaVisual extends Actor {
 
     private Sprite spr;
     private Carta cartaLogica;
+    
+    private boolean animando = false; //todas las animaciones van a tener que usar esta variable de control para que se ejecuten bien
 
     public CartaVisual(Carta cartaLogica, Texture t) {
         this.cartaLogica = cartaLogica;
@@ -62,20 +64,57 @@ public class CartaVisual extends Actor {
 		    }
 		});
         
-        
+
         addListener(new InputListener() {
+        	
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                addAction(Actions.scaleTo(0.45f, 0.45f, 0.1f));
+//                animacionEscalar(true);
+            	animacionVoltear();
+            	
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                addAction(Actions.scaleTo(0.35f, 0.35f, 0.1f));
+//            	animacionEscalar(false);
+
             }
         });
         
         
+    }
+    
+    private void animacionVoltear() {
+    	if(animando) return;
+    	
+    	animando = true;
+    	addAction(Actions.sequence(
+    			
+            	  Actions.scaleTo(0, .35f, .5f),
+            	  
+      			Actions.run(() ->{//hay que hacer esto para poder modificar cosas del codigo
+     				 spr.setTexture(new Texture(Resources.UNO_ORO));
+      			}),
+      			
+            	  Actions.scaleTo(.35f, .35f, .5f)
+      			
+
+      			
+      			));
+    	animando = false;
+    }
+    
+    private void animacionEscalar(boolean enter) {
+    	if(animando) return;
+    	animando = true;
+    	
+    	if(enter) {
+    		addAction(Actions.scaleTo(.45f, .45f, .1f));
+    	}else {
+    		addAction(Actions.scaleTo(.35f, .35f, .1f));
+    	}
+
+    	animando = false;
     }
 }
 
