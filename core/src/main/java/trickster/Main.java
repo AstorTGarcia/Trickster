@@ -27,7 +27,7 @@ public class Main extends Game {
 		case MENU:
 			//cuando el estado de juego es MENU, usamos el input multiplexer de menus
 			Gdx.input.setInputProcessor(Recursos.muxJuego);
-            setScreen(new MenuScreen(this));
+			 setScreen(new MenuScreen(this));
 			break;
 
 		case JUGANDO:
