@@ -44,9 +44,9 @@ public class MenuScreen extends Hud implements Screen {
     @Override
     public void show() {
         super.stage.setDebugAll(true);
-        Recursos.muxJuego.addProcessor(stage);//agrega la stage al mux del juego
+        Resources.muxJuego.addProcessor(stage);//agrega la stage al mux del juego
         super.visible = true;
-   }
+    }
 
     @Override
     public void render(float delta) {
@@ -62,14 +62,14 @@ public class MenuScreen extends Hud implements Screen {
         switch(option){
             // Jugar
             case 0:
-            	MundoConfig.estadoDelJuego = EstadosDelJuego.JUGANDO;
-                 GAME.setScreen(new Juego());
-                 this.dispose();
+                MundoConfig.estadoDelJuego = EstadosDelJuego.JUGANDO;
+                GAME.setScreen(new Juego());
+                this.dispose();
                 break;
             // Configuraciones
             case 1:
-            	MundoConfig.estadoDelJuego = EstadosDelJuego.CONFIGURACION;
-            	GAME.setScreen(new ConfigurationsHud());
+                MundoConfig.estadoDelJuego = EstadosDelJuego.CONFIGURACION;
+                GAME.setScreen(new ConfigurationsHud());
                 break;
             // Salir
             case 2:
@@ -95,7 +95,7 @@ public class MenuScreen extends Hud implements Screen {
 
     @Override
     public void dispose() {
-    	 Recursos.muxJuego.removeProcessor(stage);
+        Resources.muxJuego.removeProcessor(stage);
 
         super.stage.dispose();
     }
@@ -105,9 +105,9 @@ public class MenuScreen extends Hud implements Screen {
         titleStyle = FontStyle.generateFont(80, "#ffffff", false, Resources.MENU_FONT);
         optionsStyle = FontStyle.generateFont(50, "#ffffff", false, Resources.MENU_FONT);
         optionSelectedStyle = FontStyle.generateFont(50, "#ffff00", true, Resources.MENU_FONT);
-        buttonSprite = new Texture(Recursos.botonMainMenuSprite);
-        animacionHover = new Texture(Recursos.botonMainMenuHoverSprite);
-        buttonFinalSprite = new Texture(Recursos.botonMainMenuFinal);
+        buttonSprite = new Texture(Resources.botonMainMenuSprite);
+        animacionHover = new Texture(Resources.botonMainMenuHoverSprite);
+        buttonFinalSprite = new Texture(Resources.botonMainMenuFinal);
         buttonHeight = buttonSprite.getHeight();
         buttonWidth = buttonSprite.getWidth();
 

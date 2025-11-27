@@ -10,7 +10,7 @@ import trickster.screens.MenuScreen;
 import trickster.util.EstadosDelJuego;
 import trickster.util.HelpDebug;
 import trickster.util.MundoConfig;
-import trickster.util.Recursos;
+import trickster.util.Resources;
 import trickster.util.Render;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -26,13 +26,13 @@ public class Main extends Game {
         switch (MundoConfig.estadoDelJuego) {//esto nos va a servir para debugear facil
 		case MENU:
 			//cuando el estado de juego es MENU, usamos el input multiplexer de menus
-			Gdx.input.setInputProcessor(Recursos.muxJuego);
-			 setScreen(new MenuScreen(this));
+			Gdx.input.setInputProcessor(Resources.muxJuego);
+            setScreen(new MenuScreen(this));
 			break;
 
 		case JUGANDO:
 			//cuando el estado de juego es JUGANDO, usamos el input multiplexer del juego
-			Gdx.input.setInputProcessor(Recursos.muxJuego);
+			Gdx.input.setInputProcessor(Resources.muxJuego);
 			this.setScreen(new Juego());
 			break;
 		default:
