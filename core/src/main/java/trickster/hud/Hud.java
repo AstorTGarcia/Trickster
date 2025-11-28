@@ -1,6 +1,9 @@
 package trickster.hud;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import trickster.Main;
@@ -40,4 +43,5 @@ public abstract class Hud {
     protected abstract void createFonts();
     protected abstract void createActors();
     protected abstract void populateStage();
+
 }

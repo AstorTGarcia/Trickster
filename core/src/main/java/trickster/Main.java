@@ -22,7 +22,7 @@ public class Main extends Game {
     	MundoConfig.estadoDelJuego = EstadosDelJuego.MENU;//Al iniciar el juego arranca en el menu
         Render.batch = new SpriteBatch();
 
-        
+
         switch (MundoConfig.estadoDelJuego) {//esto nos va a servir para debugear facil
 		case MENU:
 			//cuando el estado de juego es MENU, usamos el input multiplexer de menus
@@ -38,8 +38,8 @@ public class Main extends Game {
 		default:
 			break;
 		}
-       
-        
+
+
 
     }
 
