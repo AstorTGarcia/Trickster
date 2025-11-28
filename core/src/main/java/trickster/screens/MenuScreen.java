@@ -22,9 +22,6 @@ import trickster.util.*;
 public class MenuScreen extends Hud implements Screen {
     private final Main GAME;
 
-
-
-
     private Table menuTable;
     private Table options;
 
@@ -43,12 +40,10 @@ public class MenuScreen extends Hud implements Screen {
 
     @Override
     public void show() {
-<<<<<<< HEAD
-        Resources.muxMenu.addProcessor(stage);//agrega la stage al mux del juego
-=======
+
         super.stage.setDebugAll(true);
-        Resources.muxJuego.addProcessor(stage);//agrega la stage al mux del juego
->>>>>>> a193d772d242e388671e1d8eaf33b03e2b105c8b
+        Resources.muxMenu.addProcessor(stage);//agrega la stage al mux del menu
+
         super.visible = true;
     }
 
@@ -137,6 +132,29 @@ public class MenuScreen extends Hud implements Screen {
         optionsText[1] = new ButtonsGame("Opciones",miSkin,buttonSprite,animacionHover,6);
         optionsText[2] = new ButtonsGame("Salir",miSkin,buttonSprite,animacionHover,6);
 
+        
+        //agrega eventos a los botones
+        
+        optionsText[0].addListener(new ClickListener(){
+        	@Override
+			public void clicked(InputEvent event, float x, float y) {
+        			selectedOption(0);
+				}
+        });
+        
+        optionsText[1].addListener(new ClickListener(){
+        	@Override
+			public void clicked(InputEvent event, float x, float y) {
+        			selectedOption(1);
+				}
+        });
+        
+        optionsText[2].addListener(new ClickListener(){
+        	@Override
+			public void clicked(InputEvent event, float x, float y) {
+        			selectedOption(2);
+				}
+        });
     }
 
     @Override
